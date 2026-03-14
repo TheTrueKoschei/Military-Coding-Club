@@ -1,2 +1,2 @@
 # Military-Coding-Club
-Project components of MCTE Mhow 
+PyClimaExplorer is a Python-powered web dashboard that makes climate science accessible to everyone. Built with Streamlit, Xarray, and Plotly, it lets researchers, students, journalists, and policy makers upload any NetCDF dataset and instantly explore spatial heatmaps, temporal trends, and anomaly patterns through a clean point-and-click interface — transforming dry multidimensional arrays into dynamic, user-driven data experiences. 
