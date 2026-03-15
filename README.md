@@ -114,7 +114,8 @@ PyClimaExplorer/
 ├── README.md                                   
 ├── ne_110m_admin_0_countries.shp               
 ├── ne_110m_admin_0_countries.dbf               
-├── ne_110m_admin_0_countries.prj               
+├── ne_110m_admin_0_countries.prj
+├── ne_110m_admin_0_countries.cpg              
 └── ne_110m_admin_0_countries.shx                                  
 ```
 ---
