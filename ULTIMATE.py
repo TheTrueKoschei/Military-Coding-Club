@@ -11,9 +11,10 @@ import os
 import geopandas as gpd
 
 # =================================================================
-# SHAPEFILE PATH  — Code A path with Code B robust fallback
+# SHAPEFILE PATH  — relative path for deployment
 # =================================================================
-NE_COUNTRIES_PATH = r"C:\Users\TUSHAR SRIVASTAVA\Desktop\Mayank Hackathon\Mayank Hackathon\ne_110m_admin_0_countries.shp"
+_script_dir = os.path.dirname(os.path.abspath(__file__))
+NE_COUNTRIES_PATH = os.path.join(_script_dir, "ne_110m_admin_0_countries.shp")
 
 try:
     WORLD_GDF = gpd.read_file(NE_COUNTRIES_PATH)
@@ -24,7 +25,6 @@ except Exception:
         WORLD_GDF = WORLD_GDF.to_crs("EPSG:4326")
     except Exception:
         WORLD_GDF = None
-
 # =================================================================
 # CUSTOM PLOTLY THEME  — Code A (rebuilt each render, dark/light aware)
 # =================================================================
@@ -161,10 +161,9 @@ def _get_img_b64(path):
     except Exception:
         return ""
 
-_script_dir = os.path.dirname(os.path.abspath(__file__))
+
 img = (
-    _get_img_b64(r"C:\Users\TUSHAR SRIVASTAVA\Desktop\Mayank Hackathon\Mayank Hackathon\photo.jpg")
-    or _get_img_b64(os.path.join(_script_dir, "photo.jpg"))
+    _get_img_b64(os.path.join(_script_dir, "photo.jpg"))
 )
 
 # =================================================================
