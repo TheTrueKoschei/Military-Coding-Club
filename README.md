@@ -106,17 +106,18 @@ Preview the first 50 rows of any variable and download the full dataset as a CSV
 ## Project Structure
 
 ```
-PyClimaExplorer/
+project/
 │
 ├── app.py                          
 ├── photo.jpg                       
-├── ne_110m_admin_0_countries.shp   
-│   ├── ne_110m_admin_0_countries.dbf
-│   ├── ne_110m_admin_0_countries.prj
-│   └── ne_110m_admin_0_countries.shx
-│
 ├── requirements.txt                
-└── README.md                       
+├── README.md                       
+└── shapefiles/                     
+    ├── ne_110m_admin_0_countries.shp
+    ├── ne_110m_admin_0_countries.dbf
+    ├── ne_110m_admin_0_countries.prj
+    ├── ne_110m_admin_0_countries.shx
+    └── ...                     
 ```
 ---
 
