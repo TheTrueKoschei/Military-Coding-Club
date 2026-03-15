@@ -1557,7 +1557,7 @@ else:
                 with c_prev:
                     if st.button("← Previous", disabled=(step == 0), key="story_prev"):
                         st.session_state.story_step = max(0, step - 1)
-                        st.experimental_rerun()
+                        st.rerun()
                 with c_center:
                     st.write("")  # spacer
                 with c_next:
@@ -1569,7 +1569,7 @@ else:
                         st.session_state.story_step = min(
                             len(step_indices) - 1, step + 1
                         )
-                        st.experimental_rerun()
+                        st.rerun()
 
                 # --- autoplay loop ---
                 if autoplay:
@@ -1577,7 +1577,7 @@ else:
                     st.session_state.story_step = next_step
                     import time as _t
                     _t.sleep(delay)
-                    st.experimental_rerun()
+                    st.rerun()
 
             # Close blue card
             st.markdown("</div>", unsafe_allow_html=True)
