@@ -1,7 +1,7 @@
 # 🌍 PyClimaExplorer
 
-> **Interactive climate data visualisation platform — no coding required.**
-> Upload any NetCDF file and instantly explore spatial patterns, temporal trends, 3D globe views, climate indices, and more — all in a stunning deep-space UI.
+> **Interactive climate data visualisation platform where no coding is required.**
+> Upload any NetCDF file and instantly explore spatial patterns, temporal trends, 3D globe views, climate indices all in a stunning deep-space UI.
 
 <br>
 
@@ -13,7 +13,7 @@
 
 ---
 
-## 📸 Preview
+## Preview
 
 | Explore Page | 3D Globe | Climate Indices |
 |---|---|---|
@@ -21,7 +21,7 @@
 
 ---
 
-## 🧭 Table of Contents
+## Table of Contents
 
 - [About the Project](#-about-the-project)
 - [Key Features](#-key-features)
@@ -41,9 +41,9 @@
 
 ---
 
-## 🌐 About the Project
+## About the Project
 
-Climate science data is powerful — but it's locked behind complex tooling, steep learning curves, and code-heavy workflows that exclude researchers, policymakers, and students who aren't programmers.
+Climate science data is powerful but it is locked behind complex tooling, steep learning curves, and code-heavy workflows that exclude researchers, policymakers, and students who aren't programmers.
 
 **PyClimaExplorer** solves this by turning raw NetCDF climate files into a fully interactive, browser-based visual dashboard. Upload a `.nc` file, and within seconds you have access to:
 
@@ -57,18 +57,18 @@ It was built for climate researchers, environmental scientists, educators, and a
 
 ---
 
-## ✨ Key Features
+## Key Features
 
-### 🗺️ Spatial Visualisation
+### Spatial Visualisation
 Render 2D contour heatmaps of any lat/lon variable at any time slice. Supports multiple colour palettes (RdBu_r, Turbo, Viridis, Plasma, RdBu).
 
-### 📈 Temporal Time Series
+### Temporal Time Series
 Automatically detect and plot the time dimension of any variable with an area-fill trend overlay.
 
-### 🌐 Interactive 3D Globe
+### Interactive 3D Globe
 Project climate data onto a photorealistic 3D sphere using Plotly's Surface trace, with country boundary lines rendered from a Natural Earth shapefile. Fully rotatable and zoomable in-browser.
 
-### 🧮 Smart Climate Indices
+### Smart Climate Indices
 Auto-detect the variable type (temperature, rainfall, wind, humidity, snow, general) and render contextually relevant indices:
 
 | Variable Type | Available Indices |
@@ -78,18 +78,18 @@ Auto-detect the variable type (temperature, rainfall, wind, humidity, snow, gene
 | **Wind / Atmospheric** | Wind Speed Distribution · Storm Frequency & Intensity · Prevailing Direction |
 | **Humidity** | Average / Max / Min · Distribution Histogram |
 
-### 📖 Story Mode
+### Story Mode
 A guided 3-step narrative explorer that walks through baseline, mid-period, and recent time slices — with a draggable timeline slider and progress indicator.
 
-### ◈ Compare Mode
+### Compare Mode
 Select any two time indices and view them side-by-side on identical spatial maps for direct visual comparison.
 
-### ↗ Export
+### Export
 Preview the first 50 rows of any variable and download the full dataset as a CSV with one click.
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 | Layer | Technology | Purpose |
 |---|---|---|
@@ -103,27 +103,24 @@ Preview the first 50 rows of any variable and download the full dataset as a CSV
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 PyClimaExplorer/
 │
-├── app.py                          # Main Streamlit application (single-file architecture)
-├── photo.jpg                       # Background image (base64 embedded at runtime)
-├── ne_110m_admin_0_countries.shp   # Natural Earth country boundaries (+ associated files)
+├── app.py                          
+├── photo.jpg                       
+├── ne_110m_admin_0_countries.shp   
 │   ├── ne_110m_admin_0_countries.dbf
 │   ├── ne_110m_admin_0_countries.prj
 │   └── ne_110m_admin_0_countries.shx
 │
-├── requirements.txt                # Python dependencies
-└── README.md                       # This file
+├── requirements.txt                
+└── README.md                       
 ```
-
-> **Note:** The shapefile path is currently hardcoded. See [Configuration](#-configuration) to update it for your system.
-
 ---
 
-## 🚀 Installation & Setup
+## Installation & Setup
 
 ### Prerequisites
 
@@ -179,11 +176,7 @@ NE_COUNTRIES_PATH = r"./ne_110m_admin_0_countries.shp"
 NE_COUNTRIES_PATH = "/home/user/project/ne_110m_admin_0_countries.shp"
 ```
 
-### 6. (Optional) Add a Background Image
-
-Place a JPEG image named `photo.jpg` in the same directory as `app.py`. It will be animated as a subtle drifting background. If no image is present, the app still runs with a gradient background.
-
-### 7. Run the App
+### 6. Run the App
 
 ```bash
 streamlit run app.py
@@ -193,10 +186,10 @@ The app will open in your browser at `http://localhost:8501`.
 
 ---
 
-## 📖 How to Use
+## How to Use
 
 ```
-1. Launch the app  ──►  2. Upload a .nc file  ──►  3. Select a variable  ──►  4. Explore!
+1. Launch the app  ──►  2. Upload a .nc file  ──►  3. Select a variable  ──►  4. Explore
 ```
 
 1. **Open the app** — the landing page greets you with an upload prompt
@@ -210,9 +203,9 @@ The app will open in your browser at `http://localhost:8501`.
 
 ---
 
-## 📄 Pages & Modules
+## Pages & Modules
 
-### ⬡ Explore (Default)
+### Explore (Default)
 The main dashboard. Renders four row sections:
 
 | Section | Content |
@@ -222,21 +215,21 @@ The main dashboard. Renders four row sections:
 | **Climate Indices** | Context-aware index panels (2 columns, auto-selected by variable type) |
 | **Distribution & Atmospheric Overview** | Histogram distribution + wind/atmospheric panel |
 
-### ◈ Compare
+### Compare
 Select two time indices with dual sliders and compare spatial maps side-by-side. Includes auto-detected time and lat/lon dimension handling.
 
-### ◉ Story Mode
+### Story Mode
 A guided 3-step explorer with:
 - Draggable timeline slider
 - 3-segment progress indicator
 - Paired 2D heatmap + 3D globe view at the selected time
 
-### ↗ Export
+### Export
 Tabular preview (first 50 rows) of any variable with one-click CSV download.
 
 ---
 
-## 🔬 Variable Auto-Detection
+## Variable Auto-Detection
 
 PyClimaExplorer automatically classifies uploaded variables using keyword matching against common CF Convention and CMIP naming standards:
 
@@ -254,30 +247,17 @@ You can override detection manually using the **Variable Selection** expander in
 
 ---
 
-## 📦 Supported Data Formats
+## Supported Data Formats
 
 | Format | Support |
 |---|---|
-| NetCDF-4 (`.nc`) | ✅ Full support |
-| NetCDF-3 Classic | ✅ Auto-fallback via `engine="netcdf4"` |
-| HDF5-backed NetCDF | ✅ Auto-fallback via `engine="h5netcdf"` |
-| Non-decodable time axes | ✅ Handled via `decode_times=False` |
+| NetCDF-4 (`.nc`) | Full support |
+| NetCDF-3 Classic | Auto-fallback via `engine="netcdf4"` |
+| HDF5-backed NetCDF | Auto-fallback via `engine="h5netcdf"` |
+| Non-decodable time axes | Handled via `decode_times=False` |
 
-**Required dimensions for full functionality:**
-
-| Feature | Required Dimensions |
-|---|---|
-| Heatmap | `lat`, `lon` |
-| Time Series | `time` (or `TIME`) |
-| 3D Globe | `lat`, `lon` |
-| Climate Indices | `time` (or `TIME`) |
-| Compare / Story | `lat`, `lon`, `time` |
 
 ---
-
-## ⚙️ Configuration
-
-All configurable values are at the top of `app.py`:
 
 ```python
 # Path to Natural Earth shapefile
@@ -297,55 +277,20 @@ Sidebar controls (available after upload):
 
 ---
 
-## ⚠️ Known Limitations
-
-- **Shapefile path is hardcoded** — must be updated manually before first run (see [Configuration](#-configuration))
-- **Large files may be slow** — the 3D globe renders all country polygons synchronously; very large `.nc` files (> 500 MB) may cause slow initial load
-- **Time series for large spatial grids** — the `to_dataframe()` call aggregates all spatial points; for high-resolution global grids this can be memory-intensive
-- **Wind indices require both U and V components** — datasets with only a scalar wind speed variable will fall back to histogram mode
-- **Streamlit HTML div limitation** — card headers use a `st.container(border=True)` + `card_header()` pattern; complex nested layouts may occasionally render outside their card boundary
-
 ---
 
-## 🗺️ Roadmap
+## Roadmap
 
 - [ ] **Animated time-lapse** — GIF/MP4 export of variable evolution across all time steps
 - [ ] **Multi-variable overlay** — plot two variables on the same spatial map with dual colour axes
 - [ ] **Anomaly detection** — automatic flagging of statistically significant events in time series
-- [ ] **Zarr support** — extend file loading to `.zarr` cloud-optimised format
 - [ ] **Region selection** — click-to-define bounding box for regional analysis
-- [ ] **Relative shapefile path** — remove the hardcoded path requirement
-- [ ] **Docker container** — one-command deployment with all dependencies bundled
 - [ ] **Multi-file comparison** — compare the same variable across two different model runs or scenarios
 
 ---
 
-## 🤝 Contributing
 
-Contributions are welcome! Here's how to get started:
-
-```bash
-# 1. Fork the repository
-# 2. Create a feature branch
-git checkout -b feature/your-feature-name
-
-# 3. Make your changes and commit
-git commit -m "feat: add your feature description"
-
-# 4. Push to your fork
-git push origin feature/your-feature-name
-
-# 5. Open a Pull Request
-```
-
-Please follow these conventions:
-- Use descriptive commit messages (`feat:`, `fix:`, `docs:`, `refactor:`)
-- Keep each PR focused on a single feature or fix
-- Test with at least one NetCDF file before submitting
-
----
-
-## 📋 Requirements
+## Requirements
 
 ```txt
 streamlit>=1.30.0
@@ -367,21 +312,14 @@ pip install streamlit numpy pandas xarray plotly geopandas netcdf4 h5netcdf scip
 
 ---
 
-## 👥 Team
 
-| Name | Role |
-|---|---|
-| **Harmanmeet** | Lead Developer · UI/UX · Data Pipeline |
-
----
-
-## 📄 License
+## License
 
 This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.
 
 ---
 
-## 🙏 Acknowledgements
+## Acknowledgements
 
 - [Natural Earth](https://www.naturalearthdata.com/) — country boundary shapefiles
 - [Streamlit](https://streamlit.io/) — the app framework that makes this possible
