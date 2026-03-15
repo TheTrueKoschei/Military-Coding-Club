@@ -108,7 +108,7 @@ Preview the first 50 rows of any variable and download the full dataset as a CSV
 ```
 PyClimaExplorer/
 │
-├── app.py                                      
+├── ULTIMATE.py                                      
 ├── photo.jpg                                   
 ├── requirements.txt                            
 ├── README.md                                   
