@@ -91,7 +91,7 @@ def make_globe_figure(lon, lat, values, title="3D Climate Globe"):
     earth = np.array(earth)
 
 # Resize to match your latitude/longitude grid
-    from PIL import Image
+   
     earth = Image.fromarray(earth)
     earth = earth.resize((sc.shape[1], sc.shape[0]))
     earth = np.array(earth)
