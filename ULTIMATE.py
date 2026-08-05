@@ -3,6 +3,7 @@ import numpy as np
 import pandas as pd
 import xarray as xr
 import plotly.graph_objects as go
+from PIL import Image
 import plotly.express as px
 import plotly.io as pio
 import tempfile
@@ -85,33 +86,75 @@ def make_globe_figure(lon, lat, values, title="3D Climate Globe"):
     # Normalize values to 0–1 for surfacecolor
     vmin = np.nanmin(values);  vmax_v = np.nanmax(values)
     sc = np.zeros_like(values) if vmax_v == vmin else (values - vmin) / (vmax_v - vmin)
+    # Load Earth texture
+    earth = Image.open("assets/earth_texture.jpg")
+    earth = np.array(earth)
 
+# Resize to match your latitude/longitude grid
+    from PIL import Image
+    earth = Image.fromarray(earth)
+    earth = earth.resize((sc.shape[1], sc.shape[0]))
+    earth = np.array(earth)
     fig = go.Figure()
 
     # Solid globe surface with stronger lighting
+    # ---------- EARTH BASE ----------
     fig.add_trace(go.Surface(
-        x=x, y=y, z=z,
-        surfacecolor=sc,
-        colorscale="RdBu_r",
-        cmin=0, cmax=1,
-        showscale=True,
-        colorbar=dict(
-            title=dict(text="Value", font=dict(color="rgba(255,255,255,0.65)", size=12)),
-            tickfont=dict(color="rgba(255,255,255,0.55)", size=10),
-            thickness=13,
-        ),
-        opacity=1.0,  # solid surface
+        x=x,
+        y=y,
+        z=z,
+    
+        surfacecolor=np.mean(earth, axis=2),
+    
+        colorscale=[
+            [0.00, "rgb(5,25,120)"],
+            [0.20, "rgb(30,80,180)"],
+            [0.35, "rgb(40,120,220)"],
+            [0.50, "rgb(50,150,70)"],
+            [0.65, "rgb(30,120,50)"],
+            [0.80, "rgb(150,120,70)"],
+            [1.00, "rgb(255,255,255)"],
+        ],
+    
+        showscale=False,
+    
         lighting=dict(
-            ambient=0.25,
-            diffuse=0.9,
-            specular=0.6,
-            roughness=0.35,
-            fresnel=0.3,
+            ambient=0.35,
+            diffuse=1.0,
+            specular=0.4,
+            roughness=0.25,
         ),
-        lightposition=dict(x=200, y=0, z=150),
+    ))
+    
+    # ---------- CLIMATE OVERLAY ----------
+    R2 = 1.002
+    
+    x2 = x * R2
+    y2 = y * R2
+    z2 = z * R2
+    
+    fig.add_trace(go.Surface(
+        x=x2,
+        y=y2,
+        z=z2,
+    
+        surfacecolor=sc,
+    
+        colorscale="RdBu_r",
+    
+        opacity=0.55,
+    
+        cmin=0,
+        cmax=1,
+    
+        showscale=True,
+    
+        colorbar=dict(
+            title="Value"
+        ),
+    
         hovertemplate="Value: %{surfacecolor:.3f}<extra></extra>",
     ))
-
     # Country boundaries on top of the surface
     if WORLD_GDF is not None:
         for _, row in WORLD_GDF.iterrows():
